@@ -1,4 +1,14 @@
+/*
+ * @Author: wangjiaxiang
+ * @Date: 2024-08-06 17:40:40
+ * @LastEditTime: 2024-08-14 19:33:55
+ * @LastEditors: wangjiaxiang
+ * @Description: 
+ * @FilePath: /juejin-helper/src/juejin/api.js
+ * 
+ */
 const http = require('./httpInstance.js')
+const { MS_TOKEN, A_BOGUS,UUID,COOKIE } = require('../ENV.js')
 class Api {
   constructor() {
     this.http = http
@@ -32,7 +42,7 @@ class Api {
    * }
    */
   checkIn() {
-    return this.http.post(`/growth_api/v1/check_in?aid=`)
+    return this.http.post(`/growth_api/v1/check_in?aid=2608&uuid=${UUID}&spider=0&msToken=${MS_TOKEN}&a_bogus=${A_BOGUS}`)
   }
 
   /**
@@ -55,7 +65,18 @@ class Api {
    * }
    */
   getLotteryConfig() {
-    return this.http.get(`/growth_api/v1/lottery_config/get?aid=`)
+    return this.http.get(`/growth_api/v1/lottery_config/get?aid=2608&uuid=${UUID}&spider=0&msToken=${MS_TOKEN}&a_bogus=${A_BOGUS}`)
+  }
+
+  /**
+   * @desc 抽奖
+   * @returns {Promise<*>}
+   * {
+   *   lottery_name: String 奖品名称
+   * }
+   */
+  drawLottery() {
+    return this.http.post(`/growth_api/v1/lottery/draw?aid=2608&uuid=${UUID}&spider=0&msToken=${MS_TOKEN}&a_bogus=${A_BOGUS}`)
   }
 
   /**
